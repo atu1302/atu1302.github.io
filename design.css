@@ -25,9 +25,33 @@ body {
 	object-fit: contain;
 }
 
-#link1,
-#link2,
-#link3,
+#link1 {
+	background-color: cfc8b2;
+	position: fixed;
+	bottom: 1px;
+	font-size: 45px;
+	text-align: center;
+	height: 10%;
+	width: 25%;
+}
+#link2 {
+	background-color: cfc8b2;
+	position: fixed;
+	bottom: 1px;
+	font-size: 45px;
+	text-align: center;
+	height: 10%;
+	width: 25%;
+}
+#link3 {
+	background-color: cfc8b2;
+	position: fixed;
+	bottom: 1px;
+	font-size: 45px;
+	text-align: center;
+	height: 10%;
+	width: 25%;
+}
 #link4 {
 	background-color: cfc8b2;
 	position: fixed;
