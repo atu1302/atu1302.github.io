@@ -20,45 +20,45 @@ body {
 }
 
 .link-icon {
-	width: 4rem;
-	height: 4rem;
+	width: 6rem;
+	height: 6rem;
 	object-fit: contain;
 }
 
 #link1 {
-	background-color: cfc8b2;
+	background-color: #ECCCC3;
 	position: fixed;
 	bottom: 1px;
 	font-size: 45px;
 	text-align: center;
-	height: 10%;
+	height: 13.9%;
 	width: 25%;
 }
 #link2 {
-	background-color: cfc8b2;
+	background-color: #EDD5Ce;
 	position: fixed;
 	bottom: 1px;
 	font-size: 45px;
 	text-align: center;
-	height: 10%;
+	height: 13.9%;
 	width: 25%;
 }
 #link3 {
-	background-color: cfc8b2;
+	background-color: #eddad5;
 	position: fixed;
 	bottom: 1px;
 	font-size: 45px;
 	text-align: center;
-	height: 10%;
+	height: 13.9%;
 	width: 25%;
 }
 #link4 {
-	background-color: cfc8b2;
+	background-color: #eddfdc;
 	position: fixed;
 	bottom: 1px;
 	font-size: 45px;
 	text-align: center;
-	height: 10%;
+	height: 13.9%;
 	width: 25%;
 }
 
@@ -67,6 +67,3 @@ body {
 #link3 { left: 50%; }
 #link4 { left: 75%; }
 
-a:hover {
-  color: purple;
-}
