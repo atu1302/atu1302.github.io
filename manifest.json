@@ -8,16 +8,16 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "icons.png",
+      "src": "quests.jpeg",
       "sizes": "48x48"
     },
     {
-      "src": "icons.png",
+      "src": "quests.jpeg",
       "sizes": "72x72 96x96 128x128 256x256",
       "purpose": "maskable"
     },
     {
-      "src": "icons.png",
+      "src": "quests.jpeg",
       "sizes": "512x512"
     }
   ]
