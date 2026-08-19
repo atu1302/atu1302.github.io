@@ -1,47 +1,56 @@
 (() => {
-    const STORAGE_KEY = 'points';
+    const STORAGE_KEY = 'pointsHistory';
 
-    function loadPoints() {
-        const v = parseInt(localStorage.getItem(STORAGE_KEY), 10);
-        return Number.isFinite(v) ? v : 0;
+    function loadHistory() {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [];
+        try {
+            const arr = JSON.parse(raw);
+            return Array.isArray(arr) ? arr.map(Number).filter(n => Number.isFinite(n) && n > 0) : [];
+        } catch (e) {
+            return [];
+        }
     }
 
-    function savePoints(n) {
-        localStorage.setItem(STORAGE_KEY, String(n));
+    function saveHistory(arr) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
     }
 
-    function updateDisplay(n) {
-        const el = document.getElementById('points-value');
-        if (el) el.textContent = String(n);
+    function getTotal(arr) {
+        return arr.reduce((s, v) => s + v, 0);
     }
 
-    function changePoints(delta) {
-        const cur = loadPoints();
-        const next = Math.max(0, cur + delta);
-        savePoints(next);
-        updateDisplay(next);
+    function updateDisplay() {
+        const arr = loadHistory();
+        const arrayEl = document.getElementById('points-array');
+        const totalEl = document.getElementById('points-total');
+        if (arrayEl) arrayEl.textContent = '[' + arr.join(', ') + ']';
+        if (totalEl) totalEl.textContent = String(getTotal(arr));
     }
 
-    function resetPoints() {
-        savePoints(0);
-        updateDisplay(0);
+    function addPoints(n) {
+        n = Number(n) || 0;
+        if (n <= 0) return;
+        const arr = loadHistory();
+        arr.push(n);
+        saveHistory(arr);
+        updateDisplay();
     }
+
+    function clearHistory() {
+        localStorage.removeItem(STORAGE_KEY);
+        updateDisplay();
+    }
+
+    // Expose a small programmatic API for the Quests app to award points.
+    window.achievePoints = {
+        addPoints,
+        getHistory: loadHistory,
+        getTotal: () => getTotal(loadHistory()),
+        _clearForDebug: clearHistory
+    };
 
     document.addEventListener('DOMContentLoaded', () => {
-        updateDisplay(loadPoints());
-
-        const add1 = document.getElementById('add1');
-        if (add1) add1.addEventListener('click', () => changePoints(1));
-
-        const add5 = document.getElementById('add5');
-        if (add5) add5.addEventListener('click', () => changePoints(5));
-
-        const sub1 = document.getElementById('sub1');
-        if (sub1) sub1.addEventListener('click', () => changePoints(-1));
-
-        const resetBtn = document.getElementById('resetPoints');
-        if (resetBtn) resetBtn.addEventListener('click', () => {
-            if (confirm('Reset points to 0?')) resetPoints();
-        });
+        updateDisplay();
     });
 })();
