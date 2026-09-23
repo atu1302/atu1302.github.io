@@ -12,31 +12,69 @@
 
 <body style="background-color: #ede6cc;">
 
-<section id="new-quest-section" style="text-align:center; padding: 1rem;">
-    <form id="new-quest-form" style="display:inline-flex; gap:0.5rem; flex-wrap:wrap; justify-content:center;">
-        <input id="quest-name" type="text" placeholder="Enter quest name" style="padding:0.6rem 0.8rem; min-width:240px;" required />
-        <button type="submit" style="padding:0.6rem 1rem;">Add Quest!!</button>
-    </form>
-</section>
+ <h1>Quest Tracker</h1>
 
-<div id="link1" style= "text-align: center;font-size: 45px; color: #cfc8b2;">
-	<div class="link-box"> <a href="link1.html" aria-label="Quests">
-	  <img src="quests.jpeg" alt="" class="link-icon"> </a> </div>
-</div>
-<div id="link2" style= "text-align: center;font-size: 45px; font-family: 'Roboto';">
-	<div class="link-box"> <a href="link2.html" aria-label="Achievements">
-	  <img src="achieve.jpeg" alt="" class="link-icon"> </a> </div>
-</div>
-<div id="link3"style= "text-align: center;font-size: 45px; font-family: 'Roboto';">
-	<div class="link-box"> <a href="link3.html" aria-label="Information">
-	  <img src="info.jpeg" alt="" class="link-icon"> </a> </div>
-</div>
-<div id="link4"style= "text-align: center;font-size: 45px; font-family: 'Roboto';">
-	<div class="link-box"> <a href="link4.html" aria-label="Premium">
-	  <img src="premium.jpeg" alt="" class="link-icon"> </a> </div>
-</div>
+  <button id="newQuestBtn">🎲 Get a Random Quest</button>
+  <button id="resetBtn">Reset</button>
 
- <section id="past-periods"></section>
+  <ul id="questList"></ul>
+
+  <script>
+    // Pool of possible quests
+    const questPool = [
+      "Walk along the beach",
+      "Find the longest stick",
+      "Go on a walk and say the alphabet with each greeting to a stranger",
+      "Walk to a beat that either speeds up/slows down and walk to that beat",
+      "Multiplayer: Have a photo recreation challenge",
+      "Dress up and go on a walk in some botanical gardens (or don’t idc)",
+      "5 4 3 2 1 colour challenge - 5 green objects, 4 blue, 3 yellow, 2 red, and 1 pink.",
+      "Brew a healing potion"
+    ];
+
+    // Get the list element
+    const list = document.getElementById('questList');
+
+    // Add a random quest to the list
+    function addRandomQuest() {
+      const randomIndex = Math.floor(Math.random() * questPool.length);
+      const quest = questPool[randomIndex];
+
+      // Create list item
+      const li = document.createElement('li');
+
+      // Create checkbox
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+
+      // Create label text
+      const label = document.createElement('span');
+      label.textContent = quest;
+
+      // Toggle 'done' styling when checked
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          li.classList.add('done');
+        } else {
+          li.classList.remove('done');
+        }
+      });
+
+      // Put it all together
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      list.appendChild(li);
+    }
+
+    // Reset the list
+    function resetList() {
+      list.innerHTML = '';
+    }
+
+    // Wire up the buttons
+    document.getElementById('newQuestBtn').addEventListener('click', addRandomQuest);
+    document.getElementById('resetBtn').addEventListener('click', resetList);
+  </script>
     <script src="app.js" defer></script>
 </body>
 </html>
